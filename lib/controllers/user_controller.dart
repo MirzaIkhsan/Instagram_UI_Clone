@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/constants.dart';
 
 import './form_controller.dart';
 import '../models/user.dart';
@@ -31,17 +29,7 @@ class UserController extends GetxController {
       if (response is User) {
         user = response;
       } else {
-        Get.defaultDialog(
-          title: 'Error',
-          content: Text('Your account hasn\'t been registered'),
-          confirm: ElevatedButton(
-            onPressed: () {
-              this._formState.reset();
-              Get.back();
-            },
-            child: Text('Oukeyy'),
-          ),
-        );
+        this._formState.showAlertDialog();
       }
     }
   }

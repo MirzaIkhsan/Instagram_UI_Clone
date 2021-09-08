@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class FormController{
+class FormController {
   var _key = GlobalKey<FormState>();
   var _email = '';
   var _password = '';
@@ -23,5 +24,19 @@ class FormController{
 
   void reset() {
     this._key.currentState?.reset();
+  }
+
+  void showAlertDialog() {
+    Get.defaultDialog(
+      title: 'Error',
+      content: Text('Your account hasn\'t been registered'),
+      confirm: ElevatedButton(
+        onPressed: () {
+          reset();
+          Get.back();
+        },
+        child: Text('Oukeyy'),
+      ),
+    );
   }
 }
