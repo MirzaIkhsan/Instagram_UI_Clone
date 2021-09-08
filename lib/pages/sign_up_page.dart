@@ -17,6 +17,8 @@ class _SignUpPageState extends State<SignUpPage>
       vsync: this,
       duration: Duration(seconds: 2),
     );
+    _controller.forward();
+
     super.initState();
   }
 
@@ -31,15 +33,14 @@ class _SignUpPageState extends State<SignUpPage>
               children: [
                 AnimatedBuilder(
                     animation: _controller,
-                    builder: (context, _) {
-                      print(_controller.value);
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: size.width * 0.55,
+                    ),
+                    builder: (context, child) {
                       return Transform.translate(
-                        offset: Offset(
-                            _controller.value + 5, _controller.value + 5),
-                        child: Image.asset(
-                          'assets/logo.png',
-                          width: size.width * 0.55,
-                        ),
+                        offset: Offset(0, _controller.value * -100),
+                        child: child,
                       );
                     }),
               ],
