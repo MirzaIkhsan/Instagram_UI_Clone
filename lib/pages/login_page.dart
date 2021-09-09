@@ -6,6 +6,7 @@ import '../constants.dart';
 import '../controllers/user_controller.dart';
 import '../widgets/custom_text_button.dart';
 import '../widgets/custom_text_form_field.dart';
+import '../widgets/already_have_account.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -14,7 +15,6 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildEmailField() {
     return CustomTextFormField(
-      controller: userController.loginController.emailController,
       hintText: 'Email',
       keyboardType: TextInputType.emailAddress,
       onSaved: (val) => userController.loginController.email = val!,
@@ -30,7 +30,6 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildPasswordField() {
     return CustomTextFormField(
-      controller: userController.loginController.passwordController,
       hintText: 'Password',
       isObsecure: true,
       keyboardType: TextInputType.visiblePassword,
@@ -91,30 +90,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account? ',
-                      style: mainFontTextStyle.copyWith(
-                        fontSize: 15,
-                        color: Colors.white60,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => SignUpPage());
-                      },
-                      child: Text(
-                        'Sign up',
-                        style: mainFontTextStyle.copyWith(
-                          fontSize: 15,
-                          color: blueColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                AlreadyHaveAccount(onTap: () => Get.off(() => SignUpPage())),
               ],
             ),
           ),

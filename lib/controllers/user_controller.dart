@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:instagram_clone/controllers/login_controller.dart';
 import 'package:instagram_clone/controllers/signup_controller.dart';
 
-import './form_controller.dart';
 import '../models/user.dart';
 import '../services/user_service.dart';
 
@@ -19,7 +18,6 @@ class UserController extends GetxController {
   User get user => this._user.value;
   LoginController get loginController => this._loginFormState;
   SignUpController get signUpController => this._signUpFormState;
-  // FormController get form => this._formState;
 
   set user(User user) => this._user.value = user;
 

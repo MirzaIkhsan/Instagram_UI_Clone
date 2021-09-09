@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram_clone/pages/login_page.dart';
+import 'package:instagram_clone/widgets/already_have_account.dart';
 import 'package:instagram_clone/widgets/custom_text_button.dart';
 
 import '../controllers/user_controller.dart';
@@ -12,7 +14,6 @@ class SignUpPage extends StatelessWidget {
 
   Widget _buildUsernameField() {
     return CustomTextFormField(
-      controller: userController.signUpController.usernameController,
       hintText: 'Username',
       keyboardType: TextInputType.name,
       onSaved: (val) => userController.signUpController.username = val!,
@@ -27,7 +28,6 @@ class SignUpPage extends StatelessWidget {
 
   Widget _buildEmailField() {
     return CustomTextFormField(
-      controller: userController.signUpController.emailController,
       hintText: 'Email',
       keyboardType: TextInputType.emailAddress,
       onSaved: (val) => userController.signUpController.email = val!,
@@ -43,7 +43,6 @@ class SignUpPage extends StatelessWidget {
 
   Widget _buildPasswordField() {
     return CustomTextFormField(
-      controller: userController.signUpController.passwordController,
       hintText: 'Password',
       isObsecure: true,
       keyboardType: TextInputType.visiblePassword,
@@ -90,7 +89,10 @@ class SignUpPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                )
+                ),
+                SizedBox(height: 20),
+                AlreadyHaveAccount(
+                    hasAccount: true, onTap: () => Get.off(() => LoginPage()))
               ],
             ),
           ),

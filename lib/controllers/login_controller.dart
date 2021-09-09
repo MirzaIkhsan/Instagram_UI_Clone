@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class LoginController {
   var _loginKey = GlobalKey<FormState>();
-  var _email = TextEditingController();
-  var _password = TextEditingController();
+  var _email = '';
+  var _password = '';
+  // var _email = TextEditingController();
+  // var _password = TextEditingController();
 
   GlobalKey<FormState> get loginKey => this._loginKey;
-  TextEditingController get emailController => this._email;
-  TextEditingController get passwordController => this._password;
-  String get email => this._email.text;
-  String get password => this._password.text;
+  // TextEditingController get emailController => this._email;
+  // TextEditingController get passwordController => this._password;
+  String get email => this._email;
+  String get password => this._password;
 
-  set email(String email) => this._email.text = email;
-  set password(String password) => this._password.text = password;
-
-  @override
-  void onClose() {
-    this._email.dispose();
-    this._password.dispose();
-    super.onClose();
-  }
+  set email(String email) => this._email = email;
+  set password(String password) => this._password = password;
 
   bool validateForm() {
     final isValid = this._loginKey.currentState?.validate();

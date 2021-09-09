@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpController extends GetxController{
+class SignUpController{
   var _signUpKey = GlobalKey<FormState>();
-  var _username = TextEditingController();
-  var _email = TextEditingController();
-  var _password = TextEditingController();
+  var _username = '';
+  var _email = '';
+  var _password = '';
 
   GlobalKey<FormState> get signUpKey => this._signUpKey;
-  TextEditingController get usernameController => this._username;
-  TextEditingController get emailController => this._email;
-  TextEditingController get passwordController => this._password;
-  String get username => this._username.text;
-  String get email => this._email.text;
-  String get password => this._password.text;
+  String get username => this._username;
+  String get email => this._email;
+  String get password => this._password;
 
-  set username(String username) => this._username.text = username;
-  set email(String email) => this._email.text = email;
-  set password(String password) => this._password.text = password;
-
-  @override
-  void onClose() {
-    this._username.dispose();
-    this._email.dispose();
-    this._password.dispose();
-    super.onClose();
-  }
+  set username(String username) => this._username = username;
+  set email(String email) => this._email = email;
+  set password(String password) => this._password = password;
 
   bool validateForm() {
     final isValid = this._signUpKey.currentState?.validate();
