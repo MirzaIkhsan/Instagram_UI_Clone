@@ -1,25 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:instagram_clone/widgets/custom_text_button.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+import '../controllers/user_controller.dart';
+import '../widgets/custom_text_form_field.dart';
 
-  @override
-  _SignUpPageState createState() => _SignUpPageState();
-}
+class SignUpPage extends StatelessWidget {
+  SignUpPage({Key? key}) : super(key: key);
 
-class _SignUpPageState extends State<SignUpPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  final userController = Get.find<UserController>();
 
-  @override
-  void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
+  Widget _buildUsernameField() {
+    return CustomTextFormField(
+      controller: userController.signUpController.usernameController,
+      hintText: 'Username',
+      keyboardType: TextInputType.name,
+      onSaved: (val) => userController.signUpController.username = val!,
+      validator: (val) {
+        if (val == null || val.isEmpty) {
+          return 'Please enter your username';
+        }
+        return null;
+      },
     );
-    _controller.forward();
+  }
 
-    super.initState();
+  Widget _buildEmailField() {
+    return CustomTextFormField(
+      controller: userController.signUpController.emailController,
+      hintText: 'Email',
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (val) => userController.signUpController.email = val!,
+      validator: (val) {
+        if (val == null || val.isEmpty) {
+          return 'Please input your email address';
+        }
+        // else if the email is not with the correct format
+        return null;
+      },
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return CustomTextFormField(
+      controller: userController.signUpController.passwordController,
+      hintText: 'Password',
+      isObsecure: true,
+      keyboardType: TextInputType.visiblePassword,
+      onSaved: (val) => userController.signUpController.password = val!,
+      validator: (val) {
+        if (val == null || val.length < 7) {
+          return 'Password must at least 7 character';
+        }
+        return null;
+      },
+    );
   }
 
   @override
@@ -31,18 +66,31 @@ class _SignUpPageState extends State<SignUpPage>
           child: SingleChildScrollView(
             child: Column(
               children: [
-                AnimatedBuilder(
-                    animation: _controller,
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: size.width * 0.55,
+                Image.asset(
+                  'assets/logo.png',
+                  width: size.width * 0.55,
+                ),
+                SizedBox(height: 35),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Form(
+                    key: userController.signUpController.signUpKey,
+                    child: Column(
+                      children: [
+                        _buildUsernameField(),
+                        SizedBox(height: 12),
+                        _buildEmailField(),
+                        SizedBox(height: 12),
+                        _buildPasswordField(),
+                        SizedBox(height: 40),
+                        CustomTextButton(
+                          text: 'Sign up',
+                          onTap: () => userController.signUp(),
+                        )
+                      ],
                     ),
-                    builder: (context, child) {
-                      return Transform.translate(
-                        offset: Offset(0, _controller.value * -100),
-                        child: child,
-                      );
-                    }),
+                  ),
+                )
               ],
             ),
           ),

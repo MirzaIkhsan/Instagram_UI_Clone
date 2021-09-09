@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class CustomTextFormField extends StatefulWidget {
+  final TextEditingController? controller;
   final String hintText;
   final bool isObsecure;
   final TextInputType? keyboardType;
@@ -11,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField({
     Key? key,
+    this.controller,
     required this.hintText,
     this.isObsecure = false,
     this.keyboardType,
@@ -35,6 +37,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: this.widget.controller,
       obscureText: showPassword,
       style: mainFontTextStyle.copyWith(color: Colors.white, fontSize: 18),
       decoration: InputDecoration(

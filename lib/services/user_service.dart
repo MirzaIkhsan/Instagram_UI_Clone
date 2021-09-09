@@ -20,4 +20,26 @@ class UserService {
       return 400;
     }
   }
+
+  dynamic postToAPI(
+    String username,
+    String email,
+    String password,
+  ) async {
+    final String url = '$baseUrl';
+
+    try {
+      var response = await dio.post(url, queryParameters: {
+        'name': username,
+        'email': email,
+        'password': password,
+      });
+      if(response.statusCode == 200) {
+        return User.fromJson(response.data['data']);
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
 }

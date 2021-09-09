@@ -10,13 +10,14 @@ import '../widgets/custom_text_form_field.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final userController = Get.put(UserController());
+  final userController = Get.find<UserController>();
 
   Widget _buildEmailField() {
     return CustomTextFormField(
+      controller: userController.loginController.emailController,
       hintText: 'Email',
       keyboardType: TextInputType.emailAddress,
-      onSaved: (val) => userController.form.email = val!,
+      onSaved: (val) => userController.loginController.email = val!,
       validator: (val) {
         if (val == null || val.isEmpty) {
           return 'Please input your email address';
@@ -29,10 +30,11 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildPasswordField() {
     return CustomTextFormField(
+      controller: userController.loginController.passwordController,
       hintText: 'Password',
       isObsecure: true,
       keyboardType: TextInputType.visiblePassword,
-      onSaved: (val) => userController.form.password = val!,
+      onSaved: (val) => userController.loginController.password = val!,
       validator: (val) {
         if (val == null || val.length < 7) {
           return 'Password must at least 7 character';
@@ -60,7 +62,7 @@ class LoginPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Form(
-                    key: userController.form.key,
+                    key: userController.loginController.loginKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -100,7 +102,9 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => Get.to(() => SignUpPage()),
+                      onTap: () {
+                        Get.to(() => SignUpPage());
+                      },
                       child: Text(
                         'Sign up',
                         style: mainFontTextStyle.copyWith(

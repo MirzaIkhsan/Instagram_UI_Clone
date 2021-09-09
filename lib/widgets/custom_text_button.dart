@@ -26,7 +26,7 @@ class CustomTextButton extends StatelessWidget {
         color: this.buttonColor ?? blueColor,
         child: Center(
           child: Text(
-            'Log in',
+            this.text,
             style: mainFontTextStyle.copyWith(
               fontSize: 18,
               color: this.textColor ?? Colors.white,
