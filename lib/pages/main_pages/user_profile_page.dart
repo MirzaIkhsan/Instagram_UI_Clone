@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram_clone/controllers/user_profile_controller.dart';
 import 'package:instagram_clone/widgets/custom_text_button.dart';
 
 import '/constants.dart';
@@ -13,7 +14,7 @@ class UserProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userController = Get.find<UserController>();
-    final userProfileController = Get.put(UserProfilePage());
+    final userProfileController = Get.put(UserProfileController());
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -26,7 +27,7 @@ class UserProfilePage extends StatelessWidget {
                 width: size.width,
                 height: 60,
                 child: Text(
-                  'MirzaX',
+                  userController.user.username,
                   style: mainFontTextStyle.copyWith(
                     fontSize: 22,
                     color: Colors.white,
@@ -43,8 +44,7 @@ class UserProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PhotoProfile(
-                      imageUrl:
-                          'https://drive.google.com/uc?export=view&id=1t0Jb1SuRIB5-fOE6Z8kdCsM_TguoM-DS',
+                      imageUrl: userProfileController.photoProfileUrl,
                     ),
                     SizedBox(width: 10),
                     UserStatistic(nPosts: 54, nFollowers: 834, nFollowing: 162),
@@ -60,7 +60,7 @@ class UserProfilePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Mirza Ikhsan',
+                      userController.user.name,
                       style: mainFontTextStyle.copyWith(
                         fontSize: 17,
                         color: Colors.white,
@@ -91,8 +91,99 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 15),
+              Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          key: GlobalKey(debugLabel: 'Gallery'),
+                          onTap: () => userProfileController.currentIdx = 0,
+                          child: Container(
+                            height: 50,
+                            child: Icon(
+                              Icons.grid_on_sharp,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          key: GlobalKey(debugLabel: 'Tag'),
+                          onTap: () => userProfileController.currentIdx = 1,
+                          child: Container(
+                            height: 50,
+                            child: Icon(
+                              Icons.tag_faces,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Obx(
+                    () => AnimatedPositioned(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.fastOutSlowIn,
+                      bottom: 0,
+                      left: userProfileController.currentIdx == 0
+                          ? 0
+                          : size.width * 0.5,
+                      child: Container(
+                        width: size.width / 2,
+                        height: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 4),
+              Obx(() {
+                return userProfileController.currentIdx == 0
+                    ? Wrap(
+                        spacing: 2,
+                        runSpacing: 2,
+                        children: [
+                          PhotoCard(),
+                          PhotoCard(),
+                          PhotoCard(),
+                          PhotoCard(),
+                          PhotoCard(),
+                        ],
+                      )
+                    : SizedBox();
+              })
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class PhotoCard extends StatelessWidget {
+  const PhotoCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width / 3 - 2,
+      height: 150,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+            'https://drive.google.com/uc?export=view&id=1t0Jb1SuRIB5-fOE6Z8kdCsM_TguoM-DS',
+          ),
+          fit: BoxFit.cover,
         ),
       ),
     );

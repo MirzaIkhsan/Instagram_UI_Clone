@@ -26,6 +26,20 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
+  Widget _buildNameField() {
+    return CustomTextFormField(
+      hintText: 'Name',
+      keyboardType: TextInputType.name,
+      onSaved: (val) => userController.signUpController.username = val!,
+      validator: (val) {
+        if (val == null || val.isEmpty) {
+          return 'Please enter your name';
+        }
+        return null;
+      },
+    );
+  }
+
   Widget _buildEmailField() {
     return CustomTextFormField(
       hintText: 'Email',

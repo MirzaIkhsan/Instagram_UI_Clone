@@ -30,6 +30,7 @@ class UserService {
 
     try {
       var response = await dio.post(url, queryParameters: {
+        'username': username,
         'name': username,
         'email': email,
         'password': password,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:instagram_clone/controllers/user_profile_controller.dart';
 import 'package:instagram_clone/pages/main_pages/user_profile_page.dart';
 
 class MainPagesNavigator extends StatefulWidget {
@@ -10,6 +12,7 @@ class MainPagesNavigator extends StatefulWidget {
 
 class _MainPagesNavigatorState extends State<MainPagesNavigator> {
   final _pageController = PageController(initialPage: 4);
+  final userProfileController = Get.put(UserProfileController());
 
   int _currentPageIdx = 4;
   late List<Widget> _pages;
@@ -63,8 +66,7 @@ class _MainPagesNavigatorState extends State<MainPagesNavigator> {
       height: 24,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(
-              'https://miro.medium.com/max/2000/1*FhefRHwEXt63Uo9RLTQf3w.jpeg'),
+          image: NetworkImage(userProfileController.photoProfileUrl),
           fit: BoxFit.cover,
         ),
         shape: BoxShape.circle,

@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Instagram Clone UI with Local API',
       theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
-      home: MainPagesNavigator(),
+      home: SignUpPage(),
     );
   }
 }

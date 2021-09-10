@@ -10,6 +10,7 @@ import '../services/user_service.dart';
 class UserController extends GetxController {
   var _user = User(
     id: 0,
+    username: '',
     name: '',
     email: '',
   ).obs;
@@ -52,6 +53,7 @@ class UserController extends GetxController {
         this._user.value = response;
         Get.off(() => MainPagesNavigator());
       } else {
+        print(response);
         this._signUpFormState.reset();
       }
     }
