@@ -4,15 +4,15 @@ import '../constants.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;
-  final Color? textColor;
-  final Color? buttonColor;
+  final TextStyle? textStyle;
+  final Decoration? buttonStyle;
   final void Function()? onTap;
 
   const CustomTextButton({
     Key? key,
     required this.text,
-    this.textColor,
-    this.buttonColor,
+    this.textStyle,
+    this.buttonStyle,
     this.onTap,
   }) : super(key: key);
 
@@ -23,15 +23,16 @@ class CustomTextButton extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 50,
-        color: this.buttonColor ?? blueColor,
+        decoration: buttonStyle ?? BoxDecoration(color: blueColor),
         child: Center(
           child: Text(
             this.text,
-            style: mainFontTextStyle.copyWith(
-              fontSize: 18,
-              color: this.textColor ?? Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
+            style: textStyle ??
+                mainFontTextStyle.copyWith(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
         ),
       ),

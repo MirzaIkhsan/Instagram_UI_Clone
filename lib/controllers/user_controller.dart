@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:instagram_clone/controllers/login_controller.dart';
 import 'package:instagram_clone/controllers/signup_controller.dart';
+import 'package:instagram_clone/pages/main_pages/user_profile_page.dart';
+import 'package:instagram_clone/pages/main_pages_navigator.dart';
 
 import '../models/user.dart';
 import '../services/user_service.dart';
@@ -31,7 +33,7 @@ class UserController extends GetxController {
 
       if (response is User) {
         this._user.value = response;
-        print(user.id);
+        Get.off(() => MainPagesNavigator());
       } else {
         this._loginFormState.showAlertDialog();
       }
@@ -48,7 +50,7 @@ class UserController extends GetxController {
       );
       if (response is User) {
         this._user.value = response;
-        print(response);
+        Get.off(() => MainPagesNavigator());
       } else {
         this._signUpFormState.reset();
       }

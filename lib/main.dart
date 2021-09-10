@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/controllers/user_controller.dart';
+import 'package:instagram_clone/pages/main_pages_navigator.dart';
 import 'package:instagram_clone/pages/sign_up_page.dart';
 
 import './constants.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Instagram Clone UI with Local API',
       theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
-      home: LoginPage(),
+      home: MainPagesNavigator(),
     );
   }
 }
