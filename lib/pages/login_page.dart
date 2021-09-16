@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/pages/sign_up_page.dart';
 
-import '../constants.dart';
+import '../constants/constants.dart';
 import '../controllers/user_controller.dart';
 import '../widgets/custom_text_button.dart';
 import '../widgets/custom_text_form_field.dart';
 import '../widgets/already_have_account.dart';
+import '../constants/controller.dart';
+import '../pages/sign_up_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class LoginPage extends StatelessWidget {
     return CustomTextFormField(
       hintText: 'Email',
       keyboardType: TextInputType.emailAddress,
-      onSaved: (val) => userController.loginController.email = val!,
+      onSaved: (val) => loginController.email = val!,
       validator: (val) {
         if (val == null || val.isEmpty) {
           return 'Please input your email address';
@@ -33,7 +34,7 @@ class LoginPage extends StatelessWidget {
       hintText: 'Password',
       isObsecure: true,
       keyboardType: TextInputType.visiblePassword,
-      onSaved: (val) => userController.loginController.password = val!,
+      onSaved: (val) => loginController.password = val!,
       validator: (val) {
         if (val == null || val.length < 7) {
           return 'Password must at least 7 character';
@@ -61,7 +62,7 @@ class LoginPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Form(
-                    key: userController.loginController.loginKey,
+                    key: loginController.key,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [

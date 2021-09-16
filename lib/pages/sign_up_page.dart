@@ -1,39 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/pages/login_page.dart';
-import 'package:instagram_clone/widgets/already_have_account.dart';
-import 'package:instagram_clone/widgets/custom_text_button.dart';
 
-import '../controllers/user_controller.dart';
 import '../widgets/custom_text_form_field.dart';
+import '../constants/controller.dart';
+import '../pages/login_page.dart';
+import '../widgets/already_have_account.dart';
+import '../widgets/custom_text_button.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
-
-  final userController = Get.find<UserController>();
 
   Widget _buildUsernameField() {
     return CustomTextFormField(
       hintText: 'Username',
       keyboardType: TextInputType.name,
-      onSaved: (val) => userController.signUpController.username = val!,
+      onSaved: (val) => signUpController.username = val!,
       validator: (val) {
         if (val == null || val.isEmpty) {
           return 'Please enter your username';
-        }
-        return null;
-      },
-    );
-  }
-
-  Widget _buildNameField() {
-    return CustomTextFormField(
-      hintText: 'Name',
-      keyboardType: TextInputType.name,
-      onSaved: (val) => userController.signUpController.username = val!,
-      validator: (val) {
-        if (val == null || val.isEmpty) {
-          return 'Please enter your name';
         }
         return null;
       },
@@ -44,7 +28,7 @@ class SignUpPage extends StatelessWidget {
     return CustomTextFormField(
       hintText: 'Email',
       keyboardType: TextInputType.emailAddress,
-      onSaved: (val) => userController.signUpController.email = val!,
+      onSaved: (val) => signUpController.email = val!,
       validator: (val) {
         if (val == null || val.isEmpty) {
           return 'Please input your email address';
@@ -60,7 +44,7 @@ class SignUpPage extends StatelessWidget {
       hintText: 'Password',
       isObsecure: true,
       keyboardType: TextInputType.visiblePassword,
-      onSaved: (val) => userController.signUpController.password = val!,
+      onSaved: (val) => signUpController.password = val!,
       validator: (val) {
         if (val == null || val.length < 7) {
           return 'Password must at least 7 character';
@@ -87,7 +71,7 @@ class SignUpPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Form(
-                    key: userController.signUpController.signUpKey,
+                    key: signUpController.key,
                     child: Column(
                       children: [
                         _buildUsernameField(),

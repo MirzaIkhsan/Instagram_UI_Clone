@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController {
+class LoginController extends GetxController {
+  static LoginController instance = Get.find();
   var _loginKey = GlobalKey<FormState>();
   var _email = '';
   var _password = '';
-  // var _email = TextEditingController();
-  // var _password = TextEditingController();
 
-  GlobalKey<FormState> get loginKey => this._loginKey;
-  // TextEditingController get emailController => this._email;
-  // TextEditingController get passwordController => this._password;
+  GlobalKey<FormState> get key => this._loginKey;
   String get email => this._email;
   String get password => this._password;
 

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpController{
+class SignUpController extends GetxController{
+  static SignUpController instance = Get.find();
   var _signUpKey = GlobalKey<FormState>();
   var _username = '';
   var _email = '';
   var _password = '';
 
-  GlobalKey<FormState> get signUpKey => this._signUpKey;
+  GlobalKey<FormState> get key => this._signUpKey;
   String get username => this._username;
   String get email => this._email;
   String get password => this._password;

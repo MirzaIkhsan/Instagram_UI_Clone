@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:instagram_clone/controllers/user_profile_controller.dart';
 import 'package:instagram_clone/widgets/custom_text_button.dart';
 
-import '/constants.dart';
+import '../../constants/constants.dart';
 import '../../controllers/user_controller.dart';
 import '../../widgets/photo_profile.dart';
 import '../../widgets/user_statistics.dart';
