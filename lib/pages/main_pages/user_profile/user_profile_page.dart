@@ -151,17 +151,24 @@ class UserProfilePage extends StatelessWidget {
                 return userProfileController.currentIdx == 0
                     ? Container(
                         width: size.width,
-                        child: GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
+                        child: GridView.builder(
+                          itemCount: picts.length,
+                          shrinkWrap: true,
+                          physics: ScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisSpacing: 4,
                             mainAxisSpacing: 4,
-                            children: picts
-                                .map((url) => GestureDetector(
-                                    onTap: () =>
-                                        Get.to(() => PhotoPage(imageUrl: url)),
-                                    child: PhotoCard(imageUrl: url)))
-                                .toList()),
+                            crossAxisCount: 3,
+                            childAspectRatio: 1,
+                          ),
+                          itemBuilder: (context, idx) {
+                            return GestureDetector(
+                                onTap: () =>
+                                    Get.to(() => PhotoPage(index: idx)),
+                                child: PhotoCard(imageUrl: picts[idx]));
+                          },
+                        ),
                       )
                     : SizedBox();
               })
