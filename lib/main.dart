@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import './constants/constants.dart';
 import './pages/sign_up_page.dart';
 import './controllers/login_controller.dart';

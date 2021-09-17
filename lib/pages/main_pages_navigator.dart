@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/controllers/user_profile_controller.dart';
-import 'package:instagram_clone/pages/main_pages/user_profile_page.dart';
+
+import '../controllers/user_profile_controller.dart';
+import '../pages/main_pages/user_profile/user_profile_page.dart';
 
 class MainPagesNavigator extends StatefulWidget {
   const MainPagesNavigator({Key? key}) : super(key: key);

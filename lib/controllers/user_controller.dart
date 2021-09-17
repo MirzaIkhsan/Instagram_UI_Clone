@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
-import 'package:instagram_clone/constants/controller.dart';
-import 'package:instagram_clone/controllers/login_controller.dart';
-import 'package:instagram_clone/controllers/signup_controller.dart';
-import 'package:instagram_clone/pages/main_pages/user_profile_page.dart';
-import 'package:instagram_clone/pages/main_pages_navigator.dart';
 
 import '../models/user.dart';
 import '../services/user_service.dart';
+import '../constants/controller.dart';
+import '../pages/main_pages_navigator.dart';
 
 class UserController extends GetxController {
   static UserController instance = Get.find();

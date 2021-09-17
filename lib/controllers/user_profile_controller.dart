@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 class UserProfileController extends GetxController
     with SingleGetTickerProviderMixin {
+
+  static UserProfileController instance = Get.find();
   var _photoProfileUrl =
       'https://drive.google.com/uc?export=view&id=1t0Jb1SuRIB5-fOE6Z8kdCsM_TguoM-DS'
           .obs;

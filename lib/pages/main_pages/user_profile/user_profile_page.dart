@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/controllers/user_profile_controller.dart';
-import 'package:instagram_clone/widgets/custom_text_button.dart';
 
-import '../../constants/constants.dart';
-import '../../controllers/user_controller.dart';
-import '../../widgets/photo_profile.dart';
-import '../../widgets/user_statistics.dart';
+import '../../../constants/constants.dart';
+import '../../../widgets/photo_profile.dart';
+import '../../../widgets/user_statistics.dart';
+import '../../../constants/controller.dart';
+import '../../../controllers/user_profile_controller.dart';
+import '../../../pages/photo_page.dart';
+import '../../../widgets/custom_text_button.dart';
 
 class UserProfilePage extends StatelessWidget {
-  UserProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userController = Get.find<UserController>();
-    final userProfileController = Get.put(UserProfileController());
+    Get.put(UserProfileController());
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -44,6 +44,8 @@ class UserProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PhotoProfile(
+                      width: 110,
+                      height: 110,
                       imageUrl: userProfileController.photoProfileUrl,
                     ),
                     SizedBox(width: 10),
@@ -147,16 +149,19 @@ class UserProfilePage extends StatelessWidget {
               SizedBox(height: 4),
               Obx(() {
                 return userProfileController.currentIdx == 0
-                    ? Wrap(
-                        spacing: 2,
-                        runSpacing: 2,
-                        children: [
-                          PhotoCard(),
-                          PhotoCard(),
-                          PhotoCard(),
-                          PhotoCard(),
-                          PhotoCard(),
-                        ],
+                    ? Container(
+                        width: size.width,
+                        child: GridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4,
+                            children: picts
+                                .map((url) => GestureDetector(
+                                    onTap: () =>
+                                        Get.to(() => PhotoPage(imageUrl: url)),
+                                    child: PhotoCard(imageUrl: url)))
+                                .toList()),
                       )
                     : SizedBox();
               })
@@ -169,19 +174,19 @@ class UserProfilePage extends StatelessWidget {
 }
 
 class PhotoCard extends StatelessWidget {
+  final String imageUrl;
   const PhotoCard({
     Key? key,
+    required this.imageUrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 3 - 2,
-      height: 150,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-            'https://drive.google.com/uc?export=view&id=1t0Jb1SuRIB5-fOE6Z8kdCsM_TguoM-DS',
+            this.imageUrl,
           ),
           fit: BoxFit.cover,
         ),
