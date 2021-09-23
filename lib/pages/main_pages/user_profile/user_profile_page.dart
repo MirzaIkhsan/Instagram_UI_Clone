@@ -49,7 +49,11 @@ class UserProfilePage extends StatelessWidget {
                       imageUrl: userProfileController.photoProfileUrl,
                     ),
                     SizedBox(width: 10),
-                    UserStatistic(nPosts: 54, nFollowers: 834, nFollowing: 162),
+                    UserStatistic(
+                      nPosts: picts.length,
+                      nFollowers: 834,
+                      nFollowing: 162,
+                    ),
                   ],
                 ),
               ),

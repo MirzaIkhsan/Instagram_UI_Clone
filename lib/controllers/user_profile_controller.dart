@@ -18,8 +18,6 @@ class UserProfileController extends GetxController
 
   String get photoProfileUrl => this._photoProfileUrl.value;
   int get currentIdx => this._currentIdx.value;
-  // TabController get tabController => this.tabController;
-  // List<Tab> get tabs => this._tabs;
 
   set currentIdx(int idx) => _currentIdx.value = idx;
 
